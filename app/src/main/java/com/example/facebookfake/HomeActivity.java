@@ -3,6 +3,8 @@ package com.example.facebookfake;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,6 +14,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 
+import com.example.facebookfake.fragments.CallFragment;
+import com.example.facebookfake.fragments.ChatsFragment;
+import com.example.facebookfake.fragments.PeopleFragment;
+import com.example.facebookfake.fragments.StoriesFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -32,6 +38,18 @@ public class HomeActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationViewHome);
         bottomNavigationView.setOnItemSelectedListener(onItemSelectedListener());
+        setFragment(new ChatsFragment());
+    }
+
+    void setFragment(Fragment newFragment) {
+        // Create new fragment and transaction
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack if needed
+        transaction.replace(R.id.fragmentContainerView, newFragment);
+        transaction.addToBackStack(null);
+        // Commit the transaction
+        transaction.commit();
     }
 
     @Override
@@ -54,10 +72,23 @@ public class HomeActivity extends AppCompatActivity {
         return new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-
+                if(item.getItemId() == R.id.bottomItemChat) {
+                    setFragment(new ChatsFragment());
+                    myToolbar.setTitle("Chats");
                 }
-                return false;
+                if(item.getItemId() == R.id.bottomItemCall) {
+                    setFragment(new CallFragment());
+                    myToolbar.setTitle("Calls");
+                }
+                if(item.getItemId() == R.id.bottomItemPeople) {
+                    setFragment(new PeopleFragment());
+                    myToolbar.setTitle("People");
+                }
+                if(item.getItemId() == R.id.bottomItemStories) {
+                    setFragment(new StoriesFragment());
+                    myToolbar.setTitle("Stories");
+                }
+                return true;
             }
         };
     }

@@ -1,12 +1,14 @@
 package com.example.facebookfake;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.facebookfake.fragments.CallFragment;
 import com.example.facebookfake.fragments.ChatsFragment;
@@ -17,13 +19,14 @@ import com.google.android.material.tabs.TabLayout;
 
 public class NewChatActivity extends AppCompatActivity {
     TabLayout tabLayout;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_chat);
 
         tabLayout = findViewById(R.id.tabLayout);
-
+        toolbar = findViewById(R.id.materialToolbar);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -56,6 +59,15 @@ public class NewChatActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

@@ -35,5 +35,6 @@
         app:itemIconTint="@color/bottom_navi_color"
         app:itemTextColor="@color/bottom_navi_color"
         app:labelVisibilityMode="labeled"
+        app:itemActiveIndicatorStyle="@android:color/transparent"
         app:menu="@menu/menu_home_bottom" />
 </LinearLayout>
