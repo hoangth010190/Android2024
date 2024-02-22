@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="16dp">
+
+    <ImageButton
+        android:id="@+id/imageButtonAvatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logo_fb" />
+
+    <Button
+        android:id="@+id/buttonNameHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:drawableRight="@drawable/baseline_keyboard_arrow_down_24"
+        android:gravity="center|start"
+        android:text="Alibaba"
+        android:textColor="@color/black" />
+
+    <ImageButton
+        android:id="@+id/imageButtonSetting"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:src="@drawable/baseline_settings_24"
+        android:tint="@color/app_main_bg" />
+</LinearLayout>
