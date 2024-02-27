@@ -15,13 +15,6 @@
         android:layout_margin="16dp"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/buttonBack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
-            android:drawableLeft="@drawable/baseline_arrow_back_ios_24" />
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
