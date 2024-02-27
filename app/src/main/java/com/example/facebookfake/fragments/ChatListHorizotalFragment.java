@@ -2,10 +2,7 @@ package com.example.facebookfake.fragments;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +12,10 @@ import com.example.facebookfake.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ChatsFragment#newInstance} factory method to
+ * Use the {@link ChatListHorizotalFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ChatsFragment extends Fragment {
+public class ChatListHorizotalFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +26,7 @@ public class ChatsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ChatsFragment() {
+    public ChatListHorizotalFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +36,11 @@ public class ChatsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ChatsFragment.
+     * @return A new instance of fragment ChatListHorizotalFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ChatsFragment newInstance(String param1, String param2) {
-        ChatsFragment fragment = new ChatsFragment();
+    public static ChatListHorizotalFragment newInstance(String param1, String param2) {
+        ChatListHorizotalFragment fragment = new ChatListHorizotalFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,28 +58,9 @@ public class ChatsFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        addChatListVertical();
-        addChatListHorizotal();
-    }
-
-    void addChatListVertical(){
-        Fragment childFragment = new ChatListVerticalFragment();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameLayoutChatVertical, childFragment).commit();
-    }
-
-    void addChatListHorizotal(){
-        Fragment childFragment = new ChatListHorizotalFragment();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameLayoutChatHorizotal, childFragment).commit();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chats, container, false);
+        return inflater.inflate(R.layout.fragment_chat_list_horizotal, container, false);
     }
 }
