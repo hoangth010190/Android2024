@@ -1,6 +1,7 @@
 package com.example.facebookfake;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -40,12 +42,24 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        setupToolBar();
+        setupBottomMenu();
+        setupDrawer();
+    }
 
+    void setupToolBar(){
         myToolbar = findViewById(R.id.materialToolbarHome);
         setSupportActionBar(myToolbar);
-
         myToolbar.setTitle("Chats");
+    }
 
+    void setupBottomMenu() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationViewHome);
+        bottomNavigationView.setOnItemSelectedListener(onItemSelectedListener());
+        setFragment(new ChatsFragment());
+    }
+
+    void setupDrawer() {
         myDrawer  = findViewById(R.id.drawerLayoutHome);
         myNavigation = findViewById(R.id.navigationViewHome);
         myNavigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -61,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
 
                 if(item.getItemId() == R.id.mnDrawerHomeLogout) {
-                    finish();
+                    showConfirmLogOut();
                 }
                 item.setChecked(true);
                 myDrawer.close();
@@ -78,10 +92,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationViewHome);
-        bottomNavigationView.setOnItemSelectedListener(onItemSelectedListener());
-        setFragment(new ChatsFragment());
     }
 
     void setFragment(Fragment newFragment) {
@@ -95,6 +105,45 @@ public class HomeActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    void showConfirmLogOut() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure?");
+        builder.setCancelable(true);
+        builder.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        gotoLoginScreen();
+                        finish();
+                    }
+                });
+
+        builder.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert = builder.create();
+        //2. now setup to change color of the button
+        alert.setOnShowListener( new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.app_main_bg, null));
+                alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.gray_light, null));
+            }
+        });
+        alert.show();
+    }
+
+    void gotoLoginScreen() {
+        Intent i = new Intent(HomeActivity.this, SignInActivity.class);
+        startActivity(i);
+        finish();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -137,6 +186,11 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         };
+    }
+
+    @Override
+    public void onBackPressed() {
+        // do nothing
     }
 }
 

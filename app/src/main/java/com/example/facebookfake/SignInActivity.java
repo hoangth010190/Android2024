@@ -20,6 +20,7 @@ public class SignInActivity extends AppCompatActivity {
                 Intent i = new Intent(SignInActivity.this, HomeActivity.class);
                 i.putExtra("","");
                 startActivity(i);
+                finish();
             }
         });
 
