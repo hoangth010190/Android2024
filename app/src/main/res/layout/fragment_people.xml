@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".fragments.PeopleFragment">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/baseline_people_alt_24" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recylerViewGrid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>

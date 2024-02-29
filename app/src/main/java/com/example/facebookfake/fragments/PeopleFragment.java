@@ -1,21 +1,30 @@
 package com.example.facebookfake.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.facebookfake.DetailChatActivity;
 import com.example.facebookfake.R;
+import com.example.facebookfake.classes.Friend;
+import com.example.facebookfake.classes.FriendHorizotalAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PeopleFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PeopleFragment extends Fragment {
+public class PeopleFragment extends Fragment implements  FriendHorizotalAdapter.FriendClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +34,7 @@ public class PeopleFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    ArrayList<Friend> lstFriendHorizontal;
     public PeopleFragment() {
         // Required empty public constructor
     }
@@ -55,12 +64,55 @@ public class PeopleFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        initSampleData();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_people, container, false);
+        FriendHorizotalAdapter adapter = new FriendHorizotalAdapter(lstFriendHorizontal,getContext(),this);
+        RecyclerView recyclerView = root.findViewById(R.id.recylerViewGrid);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
+        recyclerView.setAdapter(adapter);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_people, container, false);
+        return root;
+    }
+
+    void initSampleData() {
+        lstFriendHorizontal = new ArrayList<>();
+        lstFriendHorizontal.add(new Friend("user111","Facebook 1","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user112","Facebook 2","avatar_placeholder_2.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user113","Facebook 3","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user114","Facebook 4","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user115","Facebook 5","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user116","Facebook 6","avatar_placeholder_2.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user117","Facebook 7","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user118","Facebook 8","avatar_placeholder_2.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user119","Facebook 9","avatar_placeholder_2.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user1110","Facebook 10","avatar_placeholder_2.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user1111","Facebook 11","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user1112","Facebook 12","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user1113","Facebook 13","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user111","Facebook 1","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user112","Facebook 2","avatar_placeholder_2.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user113","Facebook 3","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user114","Facebook 4","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user115","Facebook 5","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user116","Facebook 6","avatar_placeholder_2.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user117","Facebook 7","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user118","Facebook 8","avatar_placeholder_2.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user119","Facebook 9","avatar_placeholder_2.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user1110","Facebook 10","avatar_placeholder_2.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user1111","Facebook 11","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user1112","Facebook 12","avatar_placeholder_1.jpg","Let it be...","info"));
+        lstFriendHorizontal.add(new Friend("user1113","Facebook 13","avatar_placeholder_1.jpg","Let it be...","info"));
+    }
+
+    @Override
+    public void onFriendClick(View view, int position) {
+        Intent i = new Intent(getActivity(), DetailChatActivity.class);
+        i.putExtra("data_detail_key_name", lstFriendHorizontal.get(position));
+        startActivity(i);
     }
 }
