@@ -8,12 +8,13 @@ import android.view.View;
 import android.widget.Button;
 
 public class SignInActivity extends AppCompatActivity {
-    Button btLogin;
+    Button btLogin, btSignUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        btLogin = findViewById(R.id.buttonLogin);
+        btLogin = findViewById(R.id.buttonRegister);
+        btSignUp = findViewById(R.id.buttonSignUp);
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -23,7 +24,13 @@ public class SignInActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        btSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(SignInActivity.this, SignUpActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override

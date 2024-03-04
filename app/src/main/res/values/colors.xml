@@ -3,8 +3,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 <!--    <color name="app_main_bg">#1877F2</color>-->
-    <color name="app_main_bg">#b91c84</color>
+<!--    <color name="app_main_bg">#b91c84</color>-->
+    <color name="app_main_bg">#EB673E</color>
     <color name="gray_light">#959595</color>
+    <color name="background_blur">#30000000</color>
     <color name="clear">#00000000</color>
 </resources>
 
