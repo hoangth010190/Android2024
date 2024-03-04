@@ -2,7 +2,10 @@ package com.example.facebookfake.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +58,25 @@ public class ChatsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        addChatListVertical();
+        addChatListHorizotal();
+    }
+
+    void addChatListVertical(){
+        Fragment childFragment = new ChatListVerticalFragment();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameLayoutChatVertical, childFragment).commit();
+    }
+
+    void addChatListHorizotal(){
+        Fragment childFragment = new ChatListHorizotalFragment();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameLayoutChatHorizotal, childFragment).commit();
     }
 
     @Override
