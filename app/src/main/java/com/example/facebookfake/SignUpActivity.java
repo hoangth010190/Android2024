@@ -54,6 +54,13 @@ public class SignUpActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //
+        edUsername = findViewById(R.id.editTextUserName);
+        edFullName = findViewById(R.id.editTextFullName);
+        edPass = findViewById(R.id.editTextPassword);
+        edConfirmPass = findViewById(R.id.editTextConfirmPassword);
+        btSignUp = findViewById(R.id.buttonRegister);
+        btForgotPass = findViewById(R.id.buttonForgotPassword);
     }
 
     void initAction() {
@@ -63,10 +70,48 @@ public class SignUpActivity extends AppCompatActivity {
                 displayBottomSheet();
             }
         });
+
+        btForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //
+            }
+        });
+
+        btSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //
+                if (checkInput() == true) {
+
+                }
+                //
+            }
+        });
     }
 
-    void checkInput() {
+    boolean checkInput() {
+        if (edUsername.getText().toString().length() < 6) {
+            edUsername.setError("Invalid mobile number / email.");
+            return false;
+        }
 
+        if (edFullName.getText().toString().length() < 3) {
+            edFullName.setError("Invalid full name.");
+            return false;
+        }
+
+        if (edPass.getText().toString().length() < 3) {
+            edPass.setError("Invalid password.");
+            return false;
+        }
+
+        if (!edPass.getText().toString().equals(edConfirmPass.getText().toString())) {
+            edConfirmPass.setError("Password not match.");
+            return false;
+        }
+
+        return true;
     }
 
     private void displayBottomSheet() {
@@ -85,14 +130,11 @@ public class SignUpActivity extends AppCompatActivity {
 
         // below line is to set our bottom sheet cancelable.
         bottomSheetTeachersDialog.setCanceledOnTouchOutside(true);
-        bottomSheetTeachersDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialogInterface) {
-                BottomSheetDialog d = (BottomSheetDialog) dialogInterface;
+        bottomSheetTeachersDialog.setOnShowListener(dialogInterface -> {
+            BottomSheetDialog d = (BottomSheetDialog) dialogInterface;
 
-                FrameLayout bottomSheet = (FrameLayout) d.findViewById(com.google.android.material.R.id.design_bottom_sheet);
-                BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
-            }
+            FrameLayout bottomSheet = d.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+            BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_EXPANDED);
         });
 
         // below line is to display our bottom sheet dialog.
@@ -100,21 +142,15 @@ public class SignUpActivity extends AppCompatActivity {
 
         // initializing our text views and image views.
         Button btGallery = layout.findViewById(R.id.buttonSelectGallery);
-        btGallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                imagePickerActivityResult.launch(photoPickerIntent);
-            }
+        btGallery.setOnClickListener(view -> {
+            Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+            photoPickerIntent.setType("image/*");
+            imagePickerActivityResult.launch(photoPickerIntent);
         });
         Button btCapture = layout.findViewById(R.id.buttonSelectCapture);
-        btCapture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                imageCaptureActivityResult.launch(intent);
-            }
+        btCapture.setOnClickListener(view -> {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            imageCaptureActivityResult.launch(intent);
         });
         // creating a variable for document reference.
 
