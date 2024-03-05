@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.ryan.android2024.classes.ProgressHelper;
 import com.ryan.android2024.classes.Utils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -79,8 +80,9 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //
+                ProgressHelper.showDialog(SignUpActivity.this,"Loading...");
                 if (checkInput() == true) {
-
+                    
                 }
                 //
             }
