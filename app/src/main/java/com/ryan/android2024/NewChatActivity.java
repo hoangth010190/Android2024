@@ -1,19 +1,18 @@
-package com.example.facebookfake;
+package com.ryan.android2024;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
 
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.facebookfake.fragments.CallFragment;
-import com.example.facebookfake.fragments.ChatsFragment;
-import com.example.facebookfake.fragments.PeopleFragment;
-import com.example.facebookfake.fragments.StoriesFragment;
+import com.ryan.android2024.fragments.CallFragment;
+import com.ryan.android2024.fragments.ChatsFragment;
+import com.ryan.android2024.fragments.PeopleFragment;
+import com.ryan.android2024.fragments.StoriesFragment;
 import com.google.android.material.tabs.TabLayout;
 
 

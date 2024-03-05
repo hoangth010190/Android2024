@@ -1,4 +1,4 @@
-package com.example.facebookfake.classes;
+package com.ryan.android2024.classes;
 
 import android.os.Parcel;
 import android.os.Parcelable;

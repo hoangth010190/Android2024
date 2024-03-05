@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "FaceBookFake"
+rootProject.name = "Android2024"
 include(":app")
  
