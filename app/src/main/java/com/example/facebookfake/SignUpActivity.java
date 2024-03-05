@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.facebookfake.classes.ProgressHelper;
 import com.example.facebookfake.classes.Utils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -81,6 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ProgressHelper.showDialog(SignUpActivity.this,"Loading...");
                 //
                 if (checkInput() == true) {
 
