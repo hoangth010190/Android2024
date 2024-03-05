@@ -1,4 +1,4 @@
-package com.example.facebookfake.fragments;
+package com.ryan.android2024.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.facebookfake.DetailChatActivity;
-import com.example.facebookfake.R;
-import com.example.facebookfake.classes.Friend;
-import com.example.facebookfake.classes.FriendVerticalAdapter;
+import com.ryan.android2024.DetailChatActivity;
+import com.ryan.android2024.R;
+import com.ryan.android2024.classes.Friend;
+import com.ryan.android2024.classes.FriendVerticalAdapter;
 
 import java.util.ArrayList;
 

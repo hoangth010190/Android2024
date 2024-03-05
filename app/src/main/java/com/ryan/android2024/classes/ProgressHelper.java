@@ -1,11 +1,6 @@
-package com.example.facebookfake.classes;
+package com.ryan.android2024.classes;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -16,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.facebookfake.R;
+import com.ryan.android2024.R;
 
 
 public class ProgressHelper {

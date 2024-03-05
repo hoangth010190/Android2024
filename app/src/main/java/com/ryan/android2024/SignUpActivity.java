@@ -1,19 +1,19 @@
-package com.example.facebookfake;
+package com.ryan.android2024;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -21,14 +21,19 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.example.facebookfake.classes.ProgressHelper;
-import com.example.facebookfake.classes.Utils;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.ryan.android2024.classes.ProgressHelper;
+import com.ryan.android2024.classes.Utils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     ImageView imgAvatar;
@@ -82,14 +87,43 @@ public class SignUpActivity extends AppCompatActivity {
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ProgressHelper.showDialog(SignUpActivity.this,"Loading...");
                 //
                 if (checkInput() == true) {
-
+                    ProgressHelper.showDialog(SignUpActivity.this,"Loading...");
+                    firebaseRegisterNewUser();
                 }
                 //
             }
         });
+    }
+
+    void firebaseRegisterNewUser() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Create a new user with a first and last name
+        Map<String, Object> user = new HashMap<>();
+        user.put("userName", edUsername.getText().toString().trim());
+        user.put("fullName", edFullName.getText().toString());
+        user.put("password", edPass.getText().toString());
+        user.put("avatar","");
+
+// Add a new document with a generated ID
+        db.collection("users")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        ProgressHelper.dismissDialog();
+                        Log.d("SignUpActivity", "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        ProgressHelper.dismissDialog();
+                        Log.w("SignUpActivity", "Error adding document", e);
+                    }
+                });
     }
 
     boolean checkInput() {

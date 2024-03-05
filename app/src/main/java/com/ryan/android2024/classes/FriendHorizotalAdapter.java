@@ -1,8 +1,6 @@
-package com.example.facebookfake.classes;
+package com.ryan.android2024.classes;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.facebookfake.R;
+import com.ryan.android2024.R;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class FriendHorizotalAdapter extends RecyclerView.Adapter<FriendHorizotalAdapter.FriendViewHolder> {
